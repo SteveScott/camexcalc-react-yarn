@@ -192,7 +192,7 @@ const Home = () => {
       FSTOPVALUES[Fstop],
       ISOVALUES[Iso]
     );
-  }, [FSTOPVALUES, FlashCalc, ISOVALUES, SHUTTERSPEEDVALUES, Fstop, Iso, shutterSpeed]);
+  }, [Fstop, shutterSpeed, Iso, gn]);
 
   function FlashCalc() {
     // alert("FlashCalc called");

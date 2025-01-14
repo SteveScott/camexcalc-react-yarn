@@ -276,7 +276,9 @@ const Home = () => {
       <div class="container-fluid main-app">
         <form asp-action="mainAction">
           <div class="row">
-            <div class="col-sm-12 CalculationDiv">
+            <div class="col-lg-3">
+              </div>
+            <div class="col-sm-12 col-lg-6 CalculationDiv">
               <div class="row">
                 <div class="col-xs-3 col-sm-2 col-md-4">Aperture</div>
                 <div class="hidden-xs col-sm-2 col-md-2">
@@ -342,9 +344,14 @@ const Home = () => {
                 </div>
               </div>
             </div>
+            <div class="col-lg-3">
+              </div>
             <div class="col-sm-12 CalculationDiv">
               <div class="row">
-                <div class="col-xs-4">Flash Guide Number (@ ISO 100)</div>
+
+                <div class="col-lg-3">
+                  </div>
+                <div class="col-xs-4 col-lg-2">Flash Guide Number (@ ISO 100)</div>
                 <div class="col-xs-2 ">
                   <input
                     class="NumberDisplay InputText"
@@ -355,24 +362,37 @@ const Home = () => {
                     onChange={GN_Change}
                   />
                 </div>
-                <div class="col-xs-3">
+                <div class="col-xs-3 col-lg-1">
                   <label class="NumberDisplay" id="GNDisplayMeters">
                     {flashDistMeter}
                   </label>
                 </div>
-                <div class="col-xs-3">
-                  <lable class="NumberDisplay" id="GNDisplayFeet">
+                <div class="col-xs-3 col-lg-1">
+                  <label class="NumberDisplay" id="GNDisplayFeet">
                     {flashDistFeet}
-                  </lable>
+                  </label>
                 </div>
-              </div>
-
-              <div class="row">
-                <div class="hidden-xs col-sm-2 col-md-2">Exposure Value</div>
-                <div class="hidden-xs col-sm-2 col-md-2"></div>
-                <div class="col-xs-12 col-sm-8 col-md-8 ExposureDiv">{ev}</div>
+                <div class="col-lg-3">
+                  </div>
               </div>
             </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 CalculationDiv">
+            <div class="row d-flex justify-content-center">
+              <div class="col-lg-3"></div>
+              <div class="hidden-xs col-sm-2 col-md-2 col-lg-1">Exposure Value</div>
+              <div class="hidden-xs col-sm-2 col-md-2 col-lg-1"></div>
+              <div class="col-lg-3"></div>
+            </div>
+            <div class="row d-flex justify-content-center">
+              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-12 d-flex justify-content-center">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6 ExposureDiv">{ev}</div>
+                <div class="col-lg-3"></div>
+              </div>
+            </div>
+          </div>
           </div>
         </form>
       </div>

@@ -6,17 +6,94 @@ import { styled } from "@mui/material/styles";
 
 // Create a styled Slider component
 const StyledSlider = styled(Slider)({
-  "& .MuiSlider-valueLabel": {
-    backgroundColor: "black",
-    color: "white",
-    fontSize: "18px",
+  color: "#f2ce6f",
+  height: 8,
+  padding: "18px 0 14px",
+  "& .MuiSlider-rail": {
+    opacity: 1,
+    height: 8,
+    borderRadius: 999,
+    backgroundColor: "rgba(255, 255, 255, 0.24)",
+  },
+  "& .MuiSlider-track": {
+    border: "none",
+    height: 8,
+    borderRadius: 999,
+    background: "linear-gradient(90deg, #f8dd8a 0%, #d9a53f 100%)",
   },
   "& .MuiSlider-thumb": {
-    // backgroundColor: 'black',
+    width: 22,
+    height: 22,
+    backgroundColor: "#fffaf0",
+    border: "3px solid #1d1d1d",
+    boxShadow: "0 6px 14px rgba(0, 0, 0, 0.35)",
+    "&::before": {
+      boxShadow: "none",
+    },
+    "&:hover, &.Mui-focusVisible, &.Mui-active": {
+      boxShadow: "0 0 0 8px rgba(242, 206, 111, 0.18)",
+    },
   },
-  height: "10px",
-  color: "white",
+  "& .MuiSlider-valueLabel": {
+    backgroundColor: "rgba(0, 0, 0, 0.88)",
+    color: "white",
+    fontSize: "14px",
+    fontWeight: 600,
+    borderRadius: 10,
+    padding: "6px 10px",
+    lineHeight: 1.1,
+    boxShadow: "0 10px 20px rgba(0, 0, 0, 0.25)",
+    "&::before": {
+      display: "none",
+    },
+  },
+  "@media (max-width: 767px)": {
+    padding: "14px 0 10px",
+    "& .MuiSlider-thumb": {
+      width: 20,
+      height: 20,
+    },
+    "& .MuiSlider-valueLabel": {
+      fontSize: "12px",
+      padding: "4px 8px",
+    },
+  },
 });
+
+const SliderField = ({
+  ariaLabel,
+  label,
+  labelId,
+  max,
+  onChange,
+  value,
+  valueLabel,
+}) => (
+  <div className="row slider-row">
+    <div className="col-xs-12 col-sm-4 col-md-4 slider-heading">
+      <span className="slider-heading__label">{label}</span>
+      <span className="slider-heading__value slider-heading__value--mobile">
+        {valueLabel}
+      </span>
+    </div>
+    <div className="hidden-xs col-sm-2 col-md-2 slider-value-column">
+      <label id={labelId} className="slider-heading__value">
+        {valueLabel}
+      </label>
+    </div>
+    <div className="col-xs-12 col-sm-6 col-md-6 slider-control-column">
+      <StyledSlider
+        value={value}
+        aria-label={ariaLabel}
+        valueLabelDisplay="on"
+        valueLabelFormat={valueLabel}
+        min={0}
+        max={max}
+        onChange={onChange}
+      />
+    </div>
+  </div>
+);
 
 const Home = () => {
   const FSTOPVALUES = [1, 1.4, 2, 2.8, 4, 5.6, 8, 11, 16, 22, 32, 45, 64]
@@ -67,7 +144,7 @@ const Home = () => {
   ];
   const [shutterSpeed, setShutterSpeed] = useState(5);
   const [shutterSpeedText, setShutterSpeedText] = useState(
-    SHUTTERSPEEDLABLE[5] + "s"
+    SHUTTERSPEEDLABLE[5] + " s"
   );
 
   const ISOVALUES = [25, 50, 100, 200, 400, 800, 1600, 3200];
@@ -272,124 +349,86 @@ const Home = () => {
   }
 
   return (
-    <main class="content">
-      <div class="container-fluid main-app">
-        <form asp-action="mainAction">
-          <div class="row">
-            <div class="col-lg-3">
+    <main className="content">
+      <div className="container-fluid main-app">
+        <form>
+          <div className="row">
+            <div className="col-lg-3">
               </div>
-            <div class="col-sm-12 col-lg-6 CalculationDiv">
-              <div class="row">
-                <div class="col-xs-3 col-sm-2 col-md-4">Aperture</div>
-                <div class="hidden-xs col-sm-2 col-md-2">
-                  <label id="FStopDisplay">{FstopText}</label>
-                </div>
-                <div class="col-xs-8 col-sm-8 col-md-6">
-                  {/* <input id="FStop" data-slider-id="FStop" asp-for="FStop" type="text" data-slider-handle="custom" data-slider-min="0" data-slider-max="12" data-slider-step="1" data-slider-value="4" class="slider" /> */}
-                  <StyledSlider
-                    style={{ height: "10px", color: "white" }}
-                    defaultValue={Fstop}
-                    aria-label="Default"
-                    valueLabelDisplay="on"
-                    valueLabelFormat={"F " + FSTOPVALUES[Fstop]}
-                    min={0}
-                    max={FSTOPVALUES.length - 1}
-                    onChange={FStop_Slide}
-                  />
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xs-3 col-sm-2 col-md-4">Shutter Speed</div>
-                <div class="hidden-xs col-sm-2 col-md-2">
-                  <label id="ShutterSpeedDisplay">{shutterSpeedText}</label>
-                </div>
-                <div class="col-xs-8 col-sm-8 col-md-6">
-                  {/* <input id="ShutterSpeed" data-slider-id="ShutterSpeed" asp-for="ShutterSpeed" type="text" data-slider-handle="custom" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="0" class="slider" /> */}
-                  <StyledSlider
-                    style={{ height: "10px", color: "white" }}
-                    defaultValue={shutterSpeed}
-                    aria-label="Default"
-                    valueLabelDisplay="on"
-                    valueLabelFormat={SHUTTERSPEEDLABLE[shutterSpeed] + " s"}
-                    min={0}
-                    max={SHUTTERSPEEDVALUES.length - 1}
-                    onChange={ShutterSpeed_Slide}
-                  />
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xs-3 col-sm-2 col-md-4">ISO</div>
-                <div class="hidden-xs col-sm-2 col-md-2">
-                  <label id="IsoDisplay">{isoText}</label>
-                </div>
-                <div class="col-xs-8 col-sm-8 col-md-6">
-                  {/* <input id="Iso" data-slider-id="Iso" asp-for="Iso" type="text" data-slider-handle="custom" data-slider-min="0" data-slider-max="7" data-slider-step="1" data-slider-value="2" class="slider" /> */}
-                  <StyledSlider
-                    style={{ height: "10px", color: "white" }}
-                    defaultValue={Iso}
-                    aria-label="Default"
-                    valueLabelDisplay="on"
-                    valueLabelFormat={ISOVALUES[Iso]}
-                    min={0}
-                    max={ISOVALUES.length - 1}
-                    sx={{
-                      "& .MuiSlider-valueLabel": {
-                        backgroundColor: "black",
-                        color: "white",
-                        fontSize: "20px",
-                      },
-                    }}
-                    onChange={Iso_Slide}
-                  />
-                </div>
-              </div>
+            <div className="col-sm-12 col-lg-6 CalculationDiv">
+              <SliderField
+                ariaLabel="Aperture"
+                label="Aperture"
+                labelId="FStopDisplay"
+                max={FSTOPVALUES.length - 1}
+                onChange={FStop_Slide}
+                value={Fstop}
+                valueLabel={FstopText}
+              />
+              <SliderField
+                ariaLabel="Shutter Speed"
+                label="Shutter Speed"
+                labelId="ShutterSpeedDisplay"
+                max={SHUTTERSPEEDVALUES.length - 1}
+                onChange={ShutterSpeed_Slide}
+                value={shutterSpeed}
+                valueLabel={shutterSpeedText}
+              />
+              <SliderField
+                ariaLabel="ISO"
+                label="ISO"
+                labelId="IsoDisplay"
+                max={ISOVALUES.length - 1}
+                onChange={Iso_Slide}
+                value={Iso}
+                valueLabel={String(isoText)}
+              />
             </div>
-            <div class="col-lg-3">
+            <div className="col-lg-3">
               </div>
-            <div class="col-sm-12 CalculationDiv">
-              <div class="row">
+            <div className="col-sm-12 CalculationDiv">
+              <div className="row">
 
-                <div class="col-lg-3">
+                <div className="col-lg-3">
                   </div>
-                <div class="col-xs-4 col-lg-2">Flash Guide Number (@ ISO 100)</div>
-                <div class="col-xs-2 ">
+                <div className="col-xs-4 col-lg-2">Flash Guide Number (@ ISO 100)</div>
+                <div className="col-xs-2 ">
                   <input
-                    class="NumberDisplay InputText"
+                    className="NumberDisplay InputText"
                     id="GN"
                     value={gn}
-                    asp-for="GN"
                     type="number"
                     onChange={GN_Change}
                   />
                 </div>
-                <div class="col-xs-3 col-lg-1">
-                  <label class="NumberDisplay" id="GNDisplayMeters">
+                <div className="col-xs-3 col-lg-1">
+                  <label className="NumberDisplay" id="GNDisplayMeters">
                     {flashDistMeter}
                   </label>
                 </div>
-                <div class="col-xs-3 col-lg-1">
-                  <label class="NumberDisplay" id="GNDisplayFeet">
+                <div className="col-xs-3 col-lg-1">
+                  <label className="NumberDisplay" id="GNDisplayFeet">
                     {flashDistFeet}
                   </label>
                 </div>
-                <div class="col-lg-3">
+                <div className="col-lg-3">
                   </div>
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-sm-12 CalculationDiv">
-            <div class="row d-flex justify-content-center">
-              <div class="col-lg-3"></div>
-              <div class="hidden-xs col-sm-2 col-md-2 col-lg-1">Exposure Value</div>
-              <div class="hidden-xs col-sm-2 col-md-2 col-lg-1"></div>
-              <div class="col-lg-3"></div>
+          <div className="row">
+            <div className="col-sm-12 CalculationDiv">
+            <div className="row d-flex justify-content-center">
+              <div className="col-lg-3"></div>
+              <div className="hidden-xs col-sm-2 col-md-2 col-lg-1">Exposure Value</div>
+              <div className="hidden-xs col-sm-2 col-md-2 col-lg-1"></div>
+              <div className="col-lg-3"></div>
             </div>
-            <div class="row d-flex justify-content-center">
-              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-12 d-flex justify-content-center">
-                <div class="col-lg-3"></div>
-                <div class="col-lg-6 ExposureDiv">{ev}</div>
-                <div class="col-lg-3"></div>
+            <div className="row d-flex justify-content-center">
+              <div className="col-xs-12 col-sm-8 col-md-8 col-lg-12 d-flex justify-content-center">
+                <div className="col-lg-3"></div>
+                <div className="col-lg-6 ExposureDiv">{ev}</div>
+                <div className="col-lg-3"></div>
               </div>
             </div>
           </div>

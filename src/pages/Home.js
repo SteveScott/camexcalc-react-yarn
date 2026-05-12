@@ -71,7 +71,9 @@ const SliderField = ({
 }) => (
   <div className="row slider-row">
     <div className="col-xs-12 col-sm-4 col-md-4 slider-heading">
-      <span className="slider-heading__label">{label}</span>
+      <span id={`${labelId}Label`} className="slider-heading__label">
+        {label}
+      </span>
       <span className="slider-heading__value slider-heading__value--mobile">
         {valueLabel}
       </span>
@@ -85,6 +87,7 @@ const SliderField = ({
       <StyledSlider
         value={value}
         aria-label={ariaLabel}
+        aria-labelledby={`${labelId}Label`}
         getAriaValueText={() => `${ariaLabel} ${valueLabel}`}
         valueLabelDisplay="on"
         valueLabelFormat={valueLabel}
@@ -123,7 +126,7 @@ const Home = () => {
     8,
     15,
   ];
-  const SHUTTERSPEEDLABLE = [
+  const SHUTTERSPEEDLABEL = [
     "1/8000",
     "1/4000",
     "1/2000",
@@ -145,7 +148,7 @@ const Home = () => {
   ];
   const [shutterSpeed, setShutterSpeed] = useState(5);
   const [shutterSpeedText, setShutterSpeedText] = useState(
-    SHUTTERSPEEDLABLE[5] + " s"
+    SHUTTERSPEEDLABEL[5] + " s"
   );
 
   const ISOVALUES = [25, 50, 100, 200, 400, 800, 1600, 3200];
@@ -243,7 +246,7 @@ const Home = () => {
     // shutterSpeedPosition = shutterSpeed_Slider;
     //console.log("shutterSpeed_Slider = " + shutterSpeed_Slider);
     setShutterSpeed(newValue);
-    setShutterSpeedText(SHUTTERSPEEDLABLE[newValue] + " s");
+    setShutterSpeedText(SHUTTERSPEEDLABEL[newValue] + " s");
 
     // FlashCalc();
     // calculation(SHUTTERSPEEDVALUES[newValue], FSTOPVALUES[Fstop], ISOVALUES[Iso]);

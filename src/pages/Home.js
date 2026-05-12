@@ -71,7 +71,7 @@ const SliderField = ({
 }) => (
   <div className="row slider-row">
     <div className="col-xs-12 col-sm-4 col-md-4 slider-heading">
-      <span id={`${labelId}Label`} className="slider-heading__label">
+      <span id={`${labelId}Text`} className="slider-heading__label">
         {label}
       </span>
       <span className="slider-heading__value slider-heading__value--mobile">
@@ -79,15 +79,14 @@ const SliderField = ({
       </span>
     </div>
     <div className="hidden-xs col-sm-2 col-md-2 slider-value-column">
-      <label id={labelId} className="slider-heading__value">
+      <span id={labelId} className="slider-heading__value">
         {valueLabel}
-      </label>
+      </span>
     </div>
     <div className="col-xs-12 col-sm-6 col-md-6 slider-control-column">
       <StyledSlider
         value={value}
-        aria-label={ariaLabel}
-        aria-labelledby={`${labelId}Label`}
+        aria-labelledby={`${labelId}Text`}
         getAriaValueText={() => `${ariaLabel} ${valueLabel}`}
         valueLabelDisplay="on"
         valueLabelFormat={valueLabel}

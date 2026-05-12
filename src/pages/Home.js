@@ -85,6 +85,7 @@ const SliderField = ({
       <StyledSlider
         value={value}
         aria-label={ariaLabel}
+        getAriaValueText={() => valueLabel}
         valueLabelDisplay="on"
         valueLabelFormat={valueLabel}
         min={0}

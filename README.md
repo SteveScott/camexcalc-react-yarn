@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Requirements
+
+Node.js 26 or newer (pinned in `.nvmrc`; run `nvm use` to switch). `yarn install` will refuse to run on older versions.
+
 ## Available Scripts
 
 In the project directory, you can run:
